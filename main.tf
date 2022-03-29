@@ -8,7 +8,7 @@ module "Network" {
 module "VirtualMachines" {
   source = "./modules/ApplicationServer"
   # Creating virtual machines with the names and numbers as we pass in the list, the last machine is configuration machine with public IP
-  vm_names = ["ApplicationServer-1", "ConfigurationMachine"]
+  vm_names = ["Ansible-Controler"]
   # Passing the app subnetID, creating the machines in the right subnet
   AppSubnetID = module.Network.AppSubnet
 }
