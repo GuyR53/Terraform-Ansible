@@ -12,7 +12,7 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_linux_virtual_machine_scale_set" "main" {
 
   name                            = "VMSS"
-  resource_group_name             = var.resource_group_name
+  resource_group_name             = azurerm_resource_group.rg.name
   location                        = var.my_region
   sku                             = "Standard_F2"
   admin_username                  = "adminuser"
@@ -57,7 +57,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
 # Rules for autoscaling
 resource "azurerm_monitor_autoscale_setting" "main" {
   name                = "autoscale-config"
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   location            = var.my_region
   target_resource_id  = azurerm_linux_virtual_machine_scale_set.main.id
   depends_on = [azurerm_resource_group.rg]

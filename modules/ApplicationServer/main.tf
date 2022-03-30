@@ -11,7 +11,7 @@ resource "azurerm_resource_group" "rg" {
 # Public IP for the configuration machine only
 resource "azurerm_public_ip" "public_ip" {
   name                = "ConfigurationMachine"
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   location            = var.my_region
   allocation_method   = "Static"
   depends_on = [azurerm_resource_group.rg]
@@ -24,7 +24,7 @@ resource "azurerm_network_interface" "myterraformnic" {
   count = length(var.vm_names)
   name                = "myNIC-${var.vm_names[count.index]}"
   location            = var.my_region
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   depends_on = [azurerm_resource_group.rg,azurerm_public_ip.public_ip]
 
 
@@ -46,7 +46,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
   count = length(var.vm_names)
   name                  = "${var.vm_names[count.index]}"
   location              = var.my_region
-  resource_group_name   = var.resource_group_name
+  resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.myterraformnic[count.index].id]
   size                  = "Standard_DS2_v2"
   # Installing into machines the app and dependencies

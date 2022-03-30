@@ -10,7 +10,7 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_public_ip" "LoadBalancerIP" {
   name                = "PublicIPForLB"
   location            = var.my_region
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   sku = "Standard"
   allocation_method   = "Static"
   depends_on = [azurerm_resource_group.rg]
@@ -21,7 +21,7 @@ resource "azurerm_public_ip" "LoadBalancerIP" {
  resource "azurerm_lb" "LoadBalancer" {
   name                = "LoadBalancer"
   location            = var.my_region
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   sku = "Standard"
   depends_on = [azurerm_public_ip.LoadBalancerIP]
 

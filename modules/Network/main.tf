@@ -13,7 +13,7 @@ resource "azurerm_virtual_network" "VNet" {
     name                = "GuyNet"
     address_space       = ["10.0.0.0/16"]
     location            = var.my_region
-    resource_group_name = var.resource_group_name
+    resource_group_name = azurerm_resource_group.rg.name
     depends_on = [azurerm_resource_group.rg]
 
 }
@@ -22,7 +22,7 @@ resource "azurerm_virtual_network" "VNet" {
 # Create subnet for app
 resource "azurerm_subnet" "myterraformsubnet" {
   name                 = "public"
-  resource_group_name  = var.resource_group_name
+  resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.VNet.name
   address_prefixes     = ["10.0.0.0/24"]
   depends_on           = [azurerm_resource_group.rg]
@@ -33,7 +33,7 @@ resource "azurerm_subnet" "myterraformsubnet" {
 resource "azurerm_network_security_group" "AppServer" {
   name                = "myNetworkSecurityGroupApp"
   location            = var.my_region
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   depends_on          = [azurerm_resource_group.rg, azurerm_subnet.myterraformsubnet]
 
   security_rule {
@@ -71,7 +71,7 @@ resource "azurerm_subnet_network_security_group_association" "NSGconnectiontosub
 # Create subnet for db
 resource "azurerm_subnet" "myterraformsubnet2" {
   name                 = "private"
-  resource_group_name  = var.resource_group_name
+  resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.VNet.name
   address_prefixes     = ["10.0.1.0/24"]
   service_endpoints    = ["Microsoft.Storage"]
@@ -96,7 +96,7 @@ resource "azurerm_subnet" "myterraformsubnet2" {
 resource "azurerm_network_security_group" "DBServer" {
   name                = "myNetworkSecurityGroupDB"
   location            = var.my_region
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   depends_on = [azurerm_resource_group.rg,azurerm_subnet.myterraformsubnet2]
 
 

@@ -10,7 +10,7 @@ resource "azurerm_resource_group" "rg" {
 # Create Managed DB
 resource "azurerm_private_dns_zone" "guy" {
   name                = "guy.postgres.database.azure.com"
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.rg.name
   depends_on = [azurerm_resource_group.rg]
 
 }
@@ -20,7 +20,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "guy" {
   name                  = "GuynetZone.com"
   private_dns_zone_name = azurerm_private_dns_zone.guy.name
   virtual_network_id    = var.VirtualNetworkID
-  resource_group_name   = var.resource_group_name
+  resource_group_name   = azurerm_resource_group.rg.name
   depends_on = [azurerm_resource_group.rg]
 
 }
@@ -28,7 +28,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "guy" {
 # # Create flexible server
 resource "azurerm_postgresql_flexible_server" "guy" {
   name                   = "guy-psqlflexibleserver"
-  resource_group_name    = var.resource_group_name
+  resource_group_name    = azurerm_resource_group.rg.name
   location               = var.my_region
   version                = "12"
   delegated_subnet_id    = var.DBSubnet
