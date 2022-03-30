@@ -44,6 +44,6 @@ operations/variable-scripts/variable.json
 .sentinel
 
 # My files
-password.txt
-modules/*/PrepareMachine.sh
 terraform.tfvars
+Production.tfvars
+Staging.tfvars
