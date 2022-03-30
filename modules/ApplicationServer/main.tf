@@ -10,7 +10,7 @@ resource "azurerm_resource_group" "rg" {
 
 # Public IP for the configuration machine only
 resource "azurerm_public_ip" "public_ip" {
-  name                = "ConfigurationMachine"
+  name                = "Ansible-Controler"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.my_region
   allocation_method   = "Static"
@@ -48,9 +48,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
   location              = var.my_region
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.myterraformnic[count.index].id]
-  size                  = "Standard_DS2_v2"
-  # Installing into machines the app and dependencies
-  #custom_data = filebase64("${path.module}/PrepareMachine.sh")
+  size                  = var.size
   depends_on = [azurerm_network_interface.myterraformnic]
 
 

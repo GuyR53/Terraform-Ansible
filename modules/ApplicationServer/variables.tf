@@ -10,6 +10,10 @@ variable "my_region" {
   type        = string
   default     = "eastus"
 }
+variable "size" {
+  description = "size of machine"
+  default = "Standard_DS2_v2"
+}
 
 variable "vm_names" {
   type = list

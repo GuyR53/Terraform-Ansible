@@ -18,9 +18,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
   admin_username                  = "adminuser"
   admin_password                  = var.Password
   disable_password_authentication = false
-  instances = 3
-    # Installing into machines the app and dependencies
- # custom_data = filebase64("${path.module}/PrepareMachine.sh")
+  instances = var.Instances
   depends_on = [azurerm_resource_group.rg]
 
   source_image_reference {

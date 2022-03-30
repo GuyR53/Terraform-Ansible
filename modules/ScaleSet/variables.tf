@@ -10,6 +10,21 @@ variable "my_region" {
   type        = string
   default     = "eastus"
 }
+variable "Instances" {
+  description = "Num of instances"
+  type = number
+  default = 3
+}
+variable "default" {
+  description = "how many machines on default"
+  type = number
+  default = 3
+}
+variable "minimum" {
+  description = "how many machines on minimum"
+  type = number
+  default = 3
+}
 
 variable "AppSubnetID" {
     description = "Application subnetID"
