@@ -18,30 +18,38 @@
 ### Run the infrastructure from the root module which will use the sub modules.
 
 ### For Production infrastructure write on the CLI:
-### terraform workspace select Production
-### terraform apply -var-file=Production.tfvars
+```
+$ terraform workspace select Production
+$ terraform apply -var-file=Production.tfvars
+```
 ### You should use Production.tfvars file with these variables (change the Password):
-#### Environment="production"
-#### my_region="eastus"
-#### size ="Standard_DS2_v2"
-#### sku = "Standard_F2"
-#### Instances="3"
-#### default="3"
-#### minimum="3"
-#### Password="ChooseYourPassword"
+```
+ Environment="production"
+ my_region="eastus"
+ size ="Standard_DS2_v2"
+ sku = "Standard_F2"
+ Instances="3"
+ default="3"
+ minimum="3"
+ Password="ChooseYourPassword"
+```
 
 ### For Staging infrastructure write on the CLI:
-### terraform workspace select Staging
-### terraform apply -var-file=Staging.tfvars  
+```
+$ terraform workspace select Staging
+$ terraform apply -var-file=Staging.tfvars  
+```
 ### You should use Staging.tfvars file with these variables (change the Password):
-#### Environment="staging"
-#### my_region="centralus"
-#### size ="Standard_D2ads_v5"
-#### sku = "Standard_D2ads_v5"
-#### Instances="2"
-#### default="2"
-#### minimum="2"
-#### Password="ChooseYourPassword"
+```
+ Environment="staging"
+ my_region="centralus"
+size ="Standard_D2ads_v5"
+ sku = "Standard_D2ads_v5"
+ Instances="2"
+ default="2"
+ minimum="2"
+ Password="ChooseYourPassword"
+```
 
 
 
