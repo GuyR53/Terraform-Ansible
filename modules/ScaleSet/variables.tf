@@ -12,17 +12,14 @@ variable "my_region" {
 }
 variable "Instances" {
   description = "Num of instances"
-  type = number
   default = 3
 }
 variable "default" {
   description = "how many machines on default"
-  type = number
   default = 3
 }
 variable "minimum" {
   description = "how many machines on minimum"
-  type = number
   default = 3
 }
 
@@ -45,4 +42,9 @@ variable "Password" {
   description = "Password for vm"
   default = "ItsNotTheRealPassword!123"
 
+}
+variable "sku" {
+  type = string
+  default = "Standard_D2ads_v5"
+  description = "sku for my vmss"
 }

@@ -25,9 +25,9 @@ resource "azurerm_private_dns_zone_virtual_network_link" "guy" {
 
 }
 
-# # Create flexible server
+# Create flexible server
 resource "azurerm_postgresql_flexible_server" "guy" {
-  name                   = "guy-psqlflexibleserver"
+  name                   = "guy-psqlflexibleserver-${var.Environment}"
   resource_group_name    = azurerm_resource_group.rg.name
   location               = var.my_region
   version                = "12"

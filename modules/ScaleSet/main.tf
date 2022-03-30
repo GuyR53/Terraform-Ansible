@@ -14,7 +14,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "main" {
   name                            = "VMSS"
   resource_group_name             = azurerm_resource_group.rg.name
   location                        = var.my_region
-  sku                             = "Standard_F2"
+  sku                             = var.sku
   admin_username                  = "adminuser"
   admin_password                  = var.Password
   disable_password_authentication = false
@@ -64,8 +64,8 @@ resource "azurerm_monitor_autoscale_setting" "main" {
     name = "AutoScale"
 
     capacity {
-      default = 3
-      minimum = 3
+      default = var.default
+      minimum = var.minimum
       maximum = 5
     }
 
