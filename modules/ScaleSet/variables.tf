@@ -19,6 +19,12 @@ variable "lb_backend_address_pool_id" {
   description = "Load Balancer address pool ID for vmss"
 }
 
+variable "Environment" {
+  description = "The Environment I use"
+  type = string
+  default = "Production"
+}
+
 variable "Password" {
   type = string
   description = "Password for vm"

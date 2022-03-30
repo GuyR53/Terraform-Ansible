@@ -4,5 +4,9 @@ variable "my_region" {
   type        = string
   default     = "eastus"
 }
-
+variable "Environment" {
+  description = "The Environment I use"
+  type = string
+  default = "Production"
+}
 

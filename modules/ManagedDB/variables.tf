@@ -20,6 +20,12 @@ variable "DBSubnet" {
   description = "Database subnetID (private subnet)"
 }
 
+variable "Environment" {
+  description = "The Environment I use"
+  type = string
+  default = "Production"
+}
+
 variable "Password" {
   type = string
   description = "Password for db"

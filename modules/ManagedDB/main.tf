@@ -1,7 +1,7 @@
 
 # Create resource group
 resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
+  name     = "${var.resource_group_name}-${var.Environment}"
   location = var.my_region
     tags = {
     type = "PostgresDataBaseRelated"

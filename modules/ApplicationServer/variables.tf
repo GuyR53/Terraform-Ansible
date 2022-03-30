@@ -26,6 +26,12 @@ variable "Password" {
 
 }
 
+variable "Environment" {
+  description = "The Environment I use"
+  type = string
+  default = "Production"
+}
+
 
 # Getting the index of the configuration machine to make publicIPAddress
 locals {

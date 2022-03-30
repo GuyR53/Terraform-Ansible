@@ -11,5 +11,11 @@ variable "my_region" {
   default     = "eastus"
 }
 
+variable "Environment" {
+  description = "The Environment I use"
+  type = string
+  default = "Production"
+}
+
 
 
