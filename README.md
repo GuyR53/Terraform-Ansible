@@ -2,17 +2,14 @@
 
 ## Goals:
 
-<img width="542" alt="Screen Shot 2022-03-28 at 11 54 09" src="https://user-images.githubusercontent.com/93793111/160362958-ad89d339-d94d-4fce-995e-891e3160b7e6.png">
+<img width="826" alt="Screen Shot 2022-03-30 at 22 33 45" src="https://user-images.githubusercontent.com/93793111/160917591-5466d670-112e-4c07-84b1-7bfb598dfd6a.png">
 
-### 1. Use Terraform to define all the infrastructure.
-### 2. Create a terraform module to reuse the code that creates the virtual machines.
-### 3. Ensure the application is up and running (and work automatically after reboot).
-### 4. Ensure the Network Security Group (NSG) allows to access the servers and allows communication between the web server and the database.
-### 5. Make sure the database cannot be accessed from the internet (it’s not publicly exposed).
-### 6. Make the solution elastic by using Virtual Machine Scale Sets.
-### 7. Ensure that the solution is High Available by using multiple application servers (as shown in the diagram above)
-### 8. Use the Azure PostgreSQL managed Service
-### 9. Use a Terraform backend to store the Terraform state in Azure Blob Storage
+
+### 1. Use Terraform to provision the infrastructure.
+### 2. Use Ansible to deploy the NodeWeightTracker application.
+### 3. Create two environments: Staging and Production.
+### 4. Both environments must be identical except for the size of the vms (production ones must be larger).
+
 
 
 
@@ -20,7 +17,25 @@
 
 ### Run the infrastructure from the root module which will use the sub modules.
 
-### You can use *.tfvars file with variable Password to run it.
+### You should use Production.tfvars file with these variables (change the Password):
+#### Environment="production"
+#### my_region="eastus"
+#### size ="Standard_DS2_v2"
+#### sku = "Standard_F2"
+#### Instances="3"
+#### default="3"
+#### minimum="3"
+#### Password="ChooseYourPassword"
+  
+### You should use Staging.tfvars file with these variables (change the Password):
+#### Environment="staging"
+#### my_region="centralus"
+#### size ="Standard_D2ads_v5"
+#### sku = "Standard_D2ads_v5"
+#### Instances="2"
+#### default="2"
+#### minimum="2"
+#### Password="ChooseYourPassword"
 
 
 
