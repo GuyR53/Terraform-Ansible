@@ -19,8 +19,8 @@
 
 ### For Production infrastructure write on the CLI:
 ```
-$ terraform workspace select Production
-$ terraform apply -var-file=Production.tfvars
+% terraform workspace select Production
+% terraform apply -var-file=Production.tfvars
 ```
 ### You should use Production.tfvars file with these variables (change the Password):
 ```
@@ -36,8 +36,8 @@ $ terraform apply -var-file=Production.tfvars
 
 ### For Staging infrastructure write on the CLI:
 ```
-$ terraform workspace select Staging
-$ terraform apply -var-file=Staging.tfvars  
+% terraform workspace select Staging
+% terraform apply -var-file=Staging.tfvars  
 ```
 ### You should use Staging.tfvars file with these variables (change the Password):
 ```
