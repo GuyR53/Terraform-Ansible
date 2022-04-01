@@ -42,3 +42,10 @@ resource "azurerm_postgresql_flexible_server" "guy" {
 
 
 }
+
+# disable ssl for managed db
+resource "azurerm_postgresql_flexible_server_configuration" "ssl_disable" {
+  name      = "require_secure_transport"
+  server_id = azurerm_postgresql_flexible_server.guy.id
+  value     = "off"
+}
