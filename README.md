@@ -50,8 +50,78 @@
  minimum="2"
  Password="ChooseYourPassword"
 ```
+## How to deploy
+
+Once the infrastructure is provisioned, we will deploy the app by ansible.
+In both production and staging environments we have created our ansible controler in 'AppServer-production' and 'AppServer-staging' resources groups.
+1. Connect to the ansible controlers and install ansible. 
+2. create ssh key and copy to remote machine.
+3. Configure remote machine to enable ansible to run it by changing the file value (/etc/ssh/sshd_config) for pubkeyAuthentication to "yes" 
+
+In the ansible controlers: 
 
 
+```
+% git clone https://github.com/GuyR53/AnsibleWeek6Code.git
+```
+
+Change the hosts in: inventories/prod/hosts and in inventories/stage/hosts to fit your nodes:
+```
+[stageservers]
+10.0.0.6 ansible_ssh_user=adminuser
+10.0.0.8 ansible_ssh_user=adminuser
+```
+
+```
+[prodservers]
+10.0.0.6 ansible_ssh_user=adminuser
+10.0.0.7 ansible_ssh_user=adminuser
+10.0.0.9 ansible_ssh_user=adminuser
+```
+
+Add new file prodservers.yml inside >> inventories/prod/group_vars/prodservers.yml with that content (Change the <> to your Value):
+
+```
+---
+HOST_URL: http://<LoadBalancerIP>:8080
+OKTAURL: https://<YourOktaDomain>
+OKTAID: <YourOktaID>
+OKTASECRET: <YourOktaSecret>
+PGHOST: 10.0.1.4
+PGUSERNAMEE: postgres
+PGDBNAME: postgres
+PGPASS: <YourPasswordFromAbove>
+PGPORT: 5432
+```
+
+Add new file prodservers.yml inside >> inventories/stage/group_vars/stageservers.yml with that content  (Change the <> to your Value):
+
+```
+---
+HOST_URL: http://<LoadBalancerIP>:8080
+OKTAURL: https://<YourOktaDomain>
+OKTAID: <YourOktaID>
+OKTASECRET: <YourOktaSecret>
+PGHOST: 10.0.1.4
+PGUSERNAMEE: postgres
+PGDBNAME: postgres
+PGPASS: <YourPasswordFromAbove>
+PGPORT: 5432
+```
+ 
+ then finish the deployment by:
+ 
+ ```
+ % cd AnsibleWeek6Code
+ % ansible-playbook -v -i inventories/stage --extra-vars server_env_group="stageservers" main_playbook.yml
+ % ansible-playbook -v -i inventories/prod --extra-vars server_env_group="prodservers" main_playbook.yml
+```
+You should get that result for prod (for staging same with 2 servers):
+ 
+ 
+<img width="549" alt="Screen Shot 2022-04-02 at 16 13 07" src="https://user-images.githubusercontent.com/93793111/161385002-62b570d3-8d2e-45ce-8f2b-609d818b559a.png">
+
+ 
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
